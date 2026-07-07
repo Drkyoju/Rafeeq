@@ -1,7 +1,7 @@
 {
   "name": "rafeeq",
   "version": "1.0.0",
-  "description": "Rafeeq — mutawwif field-ops prototype for Hajj & Umrah Tech Challenge",
+  "description": "Rafeeq — field-ops console for group supervisors (Hajj & Umrah Tech Challenge)",
   "scripts": {
     "test": "node test-rafeeq.mjs",
     "serve": "npx --yes serve -l 4173",

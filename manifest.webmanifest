@@ -1,7 +1,7 @@
 {
-  "name": "Rafeeq for Mutawwifs",
+  "name": "Rafeeq — Field Supervisor Ops",
   "short_name": "Rafeeq",
-  "description": "Field-ops console for mutawwifs managing pilgrim groups during Hajj & Umrah",
+  "description": "Field-ops console for group supervisors managing pilgrim groups during Hajj & Umrah",
   "lang": "ar",
   "dir": "rtl",
   "start_url": "./app.html?judge=1",
