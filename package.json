@@ -1,0 +1,18 @@
+{
+  "name": "rafeeq",
+  "version": "1.0.0",
+  "description": "Rafeeq — mutawwif field-ops prototype for Hajj & Umrah Tech Challenge",
+  "scripts": {
+    "test": "node test-rafeeq.mjs",
+    "serve": "npx --yes serve -l 4173",
+    "glm-proxy": "node glm-proxy.mjs",
+    "build": "echo 'Static site — no build step'"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "devDependencies": {
+    "playwright": "^1.61.1"
+  }
+}
