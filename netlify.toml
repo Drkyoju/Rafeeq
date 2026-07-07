@@ -6,16 +6,29 @@
   for = "/app.html"
   [headers.values]
     X-Frame-Options = "SAMEORIGIN"
+    Content-Security-Policy = "frame-ancestors 'self'"
+
+[[headers]]
+  for = "/rafeeq.html"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    Content-Security-Policy = "frame-ancestors 'self'"
 
 [[headers]]
   for = "/*"
   [headers.values]
-    X-Frame-Options = "DENY"
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
 
 [[headers]]
-  for = "/sw.js"
+  for = "/index.html"
+  [headers.values]
+    X-Frame-Options = "DENY"
+
+[[headers]]
+  for = "/pitch-deck.html"
+  [headers.values]
+    X-Frame-Options = "DENY"
   [headers.values]
     Cache-Control = "no-cache"
 
