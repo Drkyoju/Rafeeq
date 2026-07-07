@@ -679,6 +679,7 @@
   });
 
   window.initEnhancements = function () {
+    if (params.get("embed") === "1") document.body.classList.add("embed-mode");
     document.body.classList.toggle("judge-mode", judgeMode);
     document.body.classList.toggle("track3-mode", track3Mode);
     document.body.classList.toggle("manager-mode", managerMode);

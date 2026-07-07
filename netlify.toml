@@ -2,6 +2,11 @@
   publish = "."
 
 [[headers]]
+  for = "/app.html"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+
+[[headers]]
   for = "/*"
   [headers.values]
     X-Frame-Options = "DENY"

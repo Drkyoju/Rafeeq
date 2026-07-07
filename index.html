@@ -6,6 +6,15 @@
 <meta name="theme-color" content="#004825">
 <meta name="description" content="رفيق — منصة إدارة الحشود الذكية للمطوّفين | مسار ٣ — تحدي تقنيات الحج والعمرة · MCIT CODE">
 <title>رفيق | Rafeeq — Smart Crowd Management</title>
+<script>
+/* Old links like /?judge=1 still open the full product */
+(function(){
+  var p=new URLSearchParams(location.search);
+  if(p.get("judge")||p.get("manager")||p.get("track3")||p.get("app")==="1"||p.get("demo")==="1"){
+    location.replace("app.html"+location.search);
+  }
+})();
+</script>
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -18,6 +27,8 @@
     <a href="https://code.mcit.gov.sa/ar/bootcamp/HajjUmrahTech-Challenge" target="_blank" rel="noopener">code.mcit.gov.sa</a>
     <span class="sep">|</span>
     <a href="pitch-deck.html">PDF العرض</a>
+    <span class="sep">|</span>
+    <a href="app.html?judge=1" id="topDemo" style="font-weight:700">← فتح المنتج التفاعلي</a>
     <span class="sep">|</span>
     <a href="?lang=en" id="langToggle">English</a>
   </div>
@@ -37,13 +48,31 @@
     <h1 id="heroTitle">طبقة العمليات الميدانية التي تربط قرار الدولة بتنفيذ المشرف وسط الحشد</h1>
     <p class="lead" id="heroLead">رفيق يحوّل بطاقة نُسك الإلزامية إلى نظام تشغيل للمجموعة — حضور، مفقودون، طوارئ، وتوجيه حشود — من جهاز لوحي واحد. مراقبة · تحليل · إدارة.</p>
     <div class="landing-cta">
-      <a class="primary" href="app.html?judge=1" id="ctaDemo">العرض الحي للمحكمين</a>
+      <a class="primary" href="app.html?judge=1" id="ctaDemo">افتح المنتج — عرض المحكمين</a>
+      <a class="secondary" href="app.html" id="ctaFull">المنتج الكامل (كل الوحدات)</a>
       <a class="secondary" href="app.html?manager=1" id="ctaMgr">لوحة مدير الشركة</a>
     </div>
   </div>
 </section>
 
+<div class="landing-sticky-demo" id="stickyDemo">
+  <span id="stickyTxt">المنتج التفاعلي جاهز — ٤٥ حاجًا، خريطة حشود، SEHA، تنبؤ الجمرات</span>
+  <a href="app.html?judge=1" id="stickyLink">افتح الآن ↗</a>
+</div>
+
 <div class="landing-wrap">
+  <section class="landing-section" id="secLive">
+    <h2 id="secLiveT">جرّب المنتج الآن — مباشرة على هذه الصفحة</h2>
+    <p class="id" id="secLiveD" style="margin-bottom:12px">كل ما بنيناه: لوحة العمليات، خريطة الحشود، التنبيهات، صحة، التكامل — اضغط داخل الإطار أو افتح بشاشة كاملة.</p>
+    <div class="landing-preview">
+      <div class="landing-preview-bar">
+        <span id="prevLabel">رفيق Ops — Live prototype</span>
+        <a href="app.html?judge=1" id="prevFull">شاشة كاملة ↗</a>
+      </div>
+      <iframe src="app.html?judge=1&embed=1" title="Rafeeq live product demo" loading="lazy"></iframe>
+    </div>
+  </section>
+
   <section class="landing-section">
     <h2 id="secTrack">مسار ٣ — المحاور الثلاثة</h2>
     <div class="landing-grid3">
@@ -79,7 +108,9 @@
       </div>
       <div class="landing-card">
         <h3 id="demoH">روابط سريعة</h3>
-        <p style="margin:8px 0"><a href="app.html?judge=1" style="color:var(--gov-green);font-weight:600">/?judge=1</a> — <span id="demo1">عرض المحكمين</span></p>
+        <p style="margin:8px 0"><a href="app.html?judge=1" style="color:var(--gov-green);font-weight:600">app?judge=1</a> — <span id="demo1">عرض المحكمين (المنتج)</span></p>
+        <p style="margin:8px 0"><a href="/?judge=1" style="color:var(--gov-green);font-weight:600">/?judge=1</a> — <span id="demo0">نفس العرض (رابط قديم)</span></p>
+        <p style="margin:8px 0"><a href="app.html" style="color:var(--gov-green);font-weight:600">app.html</a> — <span id="demoFull">المنتج الكامل</span></p>
         <p style="margin:8px 0"><a href="app.html?judge=1&lang=en" style="color:var(--gov-green);font-weight:600">English demo</a></p>
         <p style="margin:8px 0"><a href="app.html?manager=1" style="color:var(--gov-green);font-weight:600">/?manager=1</a> — <span id="demo2">لوحة المدير</span></p>
         <p style="margin:8px 0"><a href="Rafeeq-Pitch-MCIT.pdf" style="color:var(--gov-green);font-weight:600">Rafeeq-Pitch-MCIT.pdf</a></p>
@@ -98,24 +129,32 @@
 const L={
   ar:{heroTitle:"طبقة العمليات الميدانية التي تربط قرار الدولة بتنفيذ المشرف وسط الحشد",
     heroLead:"رفيق يحوّل بطاقة نُسك الإلزامية إلى نظام تشغيل للمجموعة — حضور، مفقودون، طوارئ، وتوجيه حشود — من جهاز لوحي واحد. مراقبة · تحليل · إدارة.",
-    ctaDemo:"العرض الحي للمحكمين",ctaMgr:"لوحة مدير الشركة",secTrack:"مسار ٣ — المحاور الثلاثة",
+    ctaDemo:"افتح المنتج — عرض المحكمين",ctaFull:"المنتج الكامل (كل الوحدات)",ctaMgr:"لوحة مدير الشركة",
+    topDemo:"← فتح المنتج التفاعلي",stickyTxt:"المنتج التفاعلي جاهز — ٤٥ حاجًا، خريطة حشود، SEHA، تنبؤ الجمرات",stickyLink:"افتح الآن ↗",
+    secLiveT:"جرّب المنتج الآن — مباشرة على هذه الصفحة",secLiveD:"كل ما بنيناه: لوحة العمليات، خريطة الحشود، التنبيهات، صحة، التكامل — اضغط داخل الإطار أو افتح بشاشة كاملة.",
+    prevLabel:"رفيق Ops — Live prototype",prevFull:"شاشة كاملة ↗",
+    secTrack:"مسار ٣ — المحاور الثلاثة",
     t1h:"مراقبة",t1p:"خريطة كثافة حية، نبض ٤٥ حاجاً، مسح بطاقة نُسك، GPS الأساور",
     t2h:"تحليل",t2p:"تنبؤ كثافة ٦ ساعات، تدفق دخول/خروج الجمرات، مساعد عمليات ذكي",
     t3h:"إدارة",t3p:"مسار بديل، بث للمطوفين، لمّ الشمل، تصعيد صحة وأمن",
     secKpi:"مؤشرات التجربة (متوقعة)",k1:"زمن لمّ الشمل (−83%)",k2:"حضور مؤكّد",k3:"كشف ابتعاد مبكر",
     secInt:"تكامل المنظومة الوطنية",intNote:"* التكاملات التجريبية في النموذج — المعمارية جاهزة للربط الرسمي",
-    secDemo:"العرض التفاعلي",demoH:"روابط سريعة",demo1:"عرض المحكمين",demo2:"لوحة المدير",
+    secDemo:"العرض التفاعلي",demoH:"روابط سريعة",demo0:"نفس العرض (رابط قديم)",demo1:"عرض المحكمين (المنتج)",demoFull:"المنتج الكامل",demo2:"لوحة المدير",
     footL:"رفيق · تحدي Hajj & Umrah Tech Challenge · MCIT CODE · يوليو ٢٠٢٦",
     footR:"بيانات العرض تجريبية · PDPL — بيانات السلامة فقط",lang:"English"},
   en:{heroTitle:"The field layer that connects national decisions to the supervisor in the crowd",
     heroLead:"Rafeeq turns the mandatory Nusuk Card into the group's operating system — attendance, missing persons, emergencies, and crowd routing — from one tablet.",
-    ctaDemo:"Live judge demo",ctaMgr:"Company manager board",secTrack:"Track 3 — Three pillars",
+    ctaDemo:"Open product — judge demo",ctaFull:"Full product (all modules)",ctaMgr:"Company manager board",
+    topDemo:"← Open live product",stickyTxt:"Interactive product ready — 45 pilgrims, crowd map, SEHA, Jamarat forecast",stickyLink:"Open now ↗",
+    secLiveT:"Try the product now — live on this page",secLiveD:"Everything we built: ops board, crowd map, alerts, health, integrations — interact below or open fullscreen.",
+    prevLabel:"Rafeeq Ops — Live prototype",prevFull:"Fullscreen ↗",
+    secTrack:"Track 3 — Three pillars",
     t1h:"Monitor",t1p:"Live density map, 45-bead pulse, Nusuk scan, band GPS",
     t2h:"Analyze",t2p:"6-hour forecast, Jamarat flow, AI ops assistant",
     t3h:"Manage",t3p:"Safe reroute, mutawwif broadcast, reunification, health & security escalation",
     secKpi:"Pilot metrics (projected)",k1:"Reunification time (−83%)",k2:"Confirmed attendance",k3:"Early drift detection",
     secInt:"National ecosystem integration",intNote:"* Pilot integrations in prototype — architecture ready for official APIs",
-    secDemo:"Interactive demo",demoH:"Quick links",demo1:"Judge demo",demo2:"Manager board",
+    secDemo:"Interactive demo",demoH:"Quick links",demo0:"Same demo (legacy URL)",demo1:"Judge demo (product)",demoFull:"Full product",demo2:"Manager board",
     footL:"Rafeeq · Hajj & Umrah Tech Challenge · MCIT CODE · July 2026",
     footR:"Demo data · PDPL — safety purposes only",lang:"العربية"}
 };
