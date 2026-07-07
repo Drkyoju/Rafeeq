@@ -25,10 +25,10 @@ netlify deploy --prod
 
 | URL | Purpose |
 |-----|---------|
-| `/?judge=1` | Track 3 judge mode — hides Fiqh/Translation, MCIT card, auto-demo |
-| `/?track3=1` | Track 3 focus only (no auto-demo) |
-| `/?manager=1` | Company manager dashboard (mock aggregate) |
-| `/?judge=1&lang=en` | English judge demo for MCIT screening |
+| `https://rafeqai.netlify.app/` | Public landing (MCIT submission) |
+| `https://rafeqai.netlify.app/app?judge=1` | Track 3 judge demo — live ops console |
+| `https://rafeqai.netlify.app/app?manager=1` | Company manager dashboard |
+| `https://rafeqai.netlify.app/app?judge=1&lang=en` | English judge demo |
 
 ## Local preview
 

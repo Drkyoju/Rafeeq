@@ -2,7 +2,7 @@
  * Rafeeq — Integration Map + webhook stubs (Nusuk, Baseer, SEHA, …)
  */
 (function () {
-  const DEMO_URL = "https://rafeqai.netlify.app/?judge=1";
+  const DEMO_URL = "https://rafeqai.netlify.app/app.html?judge=1";
 
   const IX = {
     ar: {
@@ -222,7 +222,7 @@
     map.innerHTML = `<div class="int-hub-wrap">
       <div class="int-hub-center"><span class="int-hub-ic">ر</span><b>${xt("int_hub")}</b><span class="id">${xt("int_arch_d")}</span></div>
       <div class="int-orbit">${ENTITIES.map((e) => `<div class="int-node st-${e.status}" onclick="goView('${e.acts[0]}')" title="${entityName(e)}">
-        <span class="int-node-ic">${e.ic}</span><span class="int-node-nm">${entityName(e)}</span>${statusPill(e.status)}
+        <span class="int-node-badge">${e.id.slice(0,2).toUpperCase()}</span><span class="int-node-nm">${entityName(e)}</span>${statusPill(e.status)}
       </div>`).join("")}</div>
     </div>`;
 

@@ -1,0 +1,90 @@
+/* Rafeeq — government-grade shared UI */
+:root{
+  --gov-green:#006c35;
+  --gov-green-dark:#004825;
+  --gov-green-soft:#e8f3ed;
+  --gov-gold:#b8954a;
+  --gov-bg:#f4f5f4;
+  --gov-card:#ffffff;
+  --gov-ink:#1a1f1c;
+  --gov-muted:#5a635c;
+  --gov-line:#d8ddd8;
+  --gov-radius:4px;
+  --gov-font:'IBM Plex Sans Arabic','Segoe UI',Tahoma,sans-serif;
+}
+.ico{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;display:block}
+.ico-lg{width:22px;height:22px}
+
+body.gov-app{display:flex;flex-direction:column;min-height:100vh;width:100%}
+.gov-top{background:var(--gov-green-dark);color:#fff;font-size:12px;padding:0 20px;display:flex;align-items:center;justify-content:space-between;min-height:36px;gap:12px;flex-wrap:wrap}
+.gov-top a{color:rgba(255,255,255,.92);text-decoration:none;font-weight:500}
+.gov-top a:hover{text-decoration:underline}
+.gov-top .gov-top-links{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.gov-top .sep{opacity:.35;margin:0 4px}
+
+/* App shell */
+body.gov-app{background:var(--gov-bg);font-family:var(--gov-font)}
+body.gov-app .app-shell{display:flex;flex:1;min-height:calc(100vh - 36px);width:100%}
+body.gov-app .app-col{flex:1;display:flex;flex-direction:column;min-width:0}
+body.gov-foot{padding:14px 24px;background:var(--gov-card);border-top:1px solid var(--gov-line);font-size:11.5px;color:var(--gov-muted);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:auto}
+body.gov-app .breadcrumb{font-size:12px;color:var(--gov-muted);margin-bottom:6px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+body.gov-app .breadcrumb a{color:var(--gov-green);text-decoration:none;font-weight:600}
+body.gov-app .breadcrumb a:hover{text-decoration:underline}
+body.gov-app .breadcrumb .ico{width:14px;height:14px;opacity:.6}
+
+/* Override app tokens when gov-app */
+body.gov-app{--bg:var(--gov-bg);--card:var(--gov-card);--ink:var(--gov-ink);--muted:var(--gov-muted);--line:var(--gov-line);
+  --brand:var(--gov-green);--brand-deep:var(--gov-green-dark);--brand-soft:var(--gov-green-soft);
+  --sand:var(--gov-gold);--sand-soft:#f5f0e4;
+  --radius:var(--gov-radius);--shadow:none;
+  --disp:var(--gov-font);--body:var(--gov-font)}
+body.gov-app .card{box-shadow:none;border-color:var(--gov-line)}
+body.gov-app .rail{background:var(--gov-card);border-color:var(--gov-line)}
+body.gov-app .brand{border-image:none;border-bottom:1px solid var(--gov-line);padding-bottom:16px}
+body.gov-app .brand .mark{border-radius:var(--gov-radius);background:var(--gov-green);font-size:18px;font-weight:700;width:36px;height:36px}
+body.gov-app .brand .bs{color:var(--gov-muted);letter-spacing:.8px;font-size:9px}
+body.gov-app .rail button{border-radius:var(--gov-radius)}
+body.gov-app .rail button.active{background:var(--gov-green-soft);color:var(--gov-green)}
+body.gov-app .btn{border-radius:var(--gov-radius);box-shadow:none}
+body.gov-app .ctrls button{box-shadow:none;border-radius:var(--gov-radius)}
+body.gov-app .daychip{border-radius:var(--gov-radius);background:var(--gov-green-soft);color:var(--gov-green);border-color:var(--gov-line)}
+body.gov-app .fab-scan{border-radius:var(--gov-radius);width:auto;height:auto;padding:12px 18px;font-size:13px;font-weight:700;gap:8px;flex-direction:row}
+body.gov-app .fab-scan .ico{width:20px;height:20px}
+body.gov-app .misbaha,body.gov-app .action-strip{box-shadow:none}
+body.gov-app h1,h2,h3,.kpi .n{font-family:var(--gov-font)}
+
+/* Landing page */
+.landing{min-height:100vh;background:var(--gov-bg);color:var(--gov-ink);font-family:var(--gov-font);line-height:1.65}
+.landing-hero{background:linear-gradient(165deg,var(--gov-green-dark) 0%,var(--gov-green) 55%,#0a7a48 100%);color:#fff;padding:56px 24px 64px}
+.landing-hero-inner{max-width:960px;margin:0 auto}
+.landing-hero h1{font-size:clamp(28px,5vw,42px);font-weight:700;line-height:1.25;margin:16px 0 12px;max-width:720px}
+.landing-hero .lead{font-size:16px;opacity:.92;max-width:600px;line-height:1.8}
+.landing-logo{display:flex;align-items:center;gap:12px}
+.landing-logo .mark{width:48px;height:48px;background:#fff;color:var(--gov-green-dark);border-radius:var(--gov-radius);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:22px}
+.landing-logo .word{font-weight:700;font-size:20px}
+.landing-logo .sub{font-size:11px;opacity:.75;letter-spacing:.5px}
+.landing-badges{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0}
+.landing-badges span{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);padding:5px 12px;border-radius:var(--gov-radius);font-size:12px;font-weight:600}
+.landing-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.landing-cta a{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:var(--gov-radius);font-weight:700;font-size:14px;text-decoration:none;transition:.15s}
+.landing-cta .primary{background:#fff;color:var(--gov-green-dark)}
+.landing-cta .primary:hover{filter:brightness(.96)}
+.landing-cta .secondary{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.5)}
+.landing-cta .secondary:hover{background:rgba(255,255,255,.08)}
+.landing-wrap{max-width:960px;margin:0 auto;padding:0 24px}
+.landing-section{padding:48px 0}
+.landing-section h2{font-size:22px;font-weight:700;color:var(--gov-green-dark);margin-bottom:20px;padding-bottom:10px;border-bottom:2px solid var(--gov-green)}
+.landing-grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.landing-grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+@media(max-width:768px){.landing-grid3,.landing-grid2{grid-template-columns:1fr}}
+.landing-card{background:var(--gov-card);border:1px solid var(--gov-line);border-radius:var(--gov-radius);padding:20px}
+.landing-card h3{font-size:15px;font-weight:700;color:var(--gov-green);margin-bottom:8px}
+.landing-card p{font-size:13px;color:var(--gov-muted)}
+.landing-kpi{text-align:center;padding:24px 16px}
+.landing-kpi .n{font-size:32px;font-weight:700;color:var(--gov-green);line-height:1}
+.landing-kpi .l{font-size:12px;color:var(--gov-muted);margin-top:6px}
+.landing-partners{display:flex;flex-wrap:wrap;gap:10px}
+.landing-partners span{padding:8px 14px;background:var(--gov-card);border:1px solid var(--gov-line);border-radius:var(--gov-radius);font-size:12px;font-weight:600;color:var(--gov-ink)}
+.landing-foot{background:var(--gov-green-dark);color:rgba(255,255,255,.85);padding:28px 24px;font-size:12px}
+.landing-foot a{color:#fff}
+.landing-foot-inner{max-width:960px;margin:0 auto;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}

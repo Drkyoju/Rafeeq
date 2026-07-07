@@ -1,2 +1,2 @@
-# SPA fallback for deep links (assets still served normally)
-/*    /index.html   200
+/app      /app.html    200
+/rafeeq   /app.html    200

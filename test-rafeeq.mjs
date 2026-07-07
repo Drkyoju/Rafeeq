@@ -33,7 +33,7 @@ function serve(req, res) {
 const server = createServer(serve);
 await new Promise((r) => server.listen(0, "127.0.0.1", r));
 const port = server.address().port;
-const base = `http://127.0.0.1:${port}/index.html`;
+const base = `http://127.0.0.1:${port}/app.html`;
 
 let playwright;
 try {

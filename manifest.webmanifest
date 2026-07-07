@@ -4,11 +4,11 @@
   "description": "Field-ops console for mutawwifs managing pilgrim groups during Hajj & Umrah",
   "lang": "ar",
   "dir": "rtl",
-  "start_url": "./index.html",
+  "start_url": "./app.html?judge=1",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#f6f4ee",
-  "theme_color": "#08503d",
+  "background_color": "#f4f5f4",
+  "theme_color": "#004825",
   "orientation": "any",
   "icons": [
     {
