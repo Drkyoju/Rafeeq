@@ -1,5 +1,5 @@
-const CACHE = "rafeeq-v4";
-const SHELL = ["./", "./index.html", "./rafeeq.html", "./rafeeq-enhancements.js", "./manifest.webmanifest", "./icon.svg", "./_redirects"];
+const CACHE = "rafeeq-v5";
+const SHELL = ["./", "./index.html", "./rafeeq.html", "./rafeeq-enhancements.js", "./rafeeq-integrations.js", "./pitch-deck.html", "./manifest.webmanifest", "./icon.svg", "./_redirects"];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(

@@ -79,6 +79,15 @@
       mcit_t: "مطابقة متطلبات MCIT — مسار ٣",
       mcit_sub: "مراقبة · تحليل · إدارة — ذكاء اصطناعي + استشعار + بيانات",
       mcit_url: "code.mcit.gov.sa — تحدي تقنيات الحج والعمرة",
+      mgr_roi: "تقدير العائد (ROI)",
+      mgr_roi_d: "توفير تشغيلي مقارنة بورقة + واتساب",
+      mgr_sla: "SLA الامتثال",
+      mgr_zones: "توزيع المجموعات — المشاعر",
+      mgr_alerts_br: "تفصيل التنبيهات",
+      mgr_top_groups: "أفضل المجموعات",
+      mgr_int_health: "صحة التكاملات",
+      mgr_cost_save: "توفير موسمي تقديري",
+      mgr_contract: "جاهزية العقد",
     },
     en: {
       nav_alerts: "Alerts",
@@ -140,6 +149,15 @@
       mcit_t: "MCIT Track 3 compliance",
       mcit_sub: "Monitor · analyze · manage — AI + sensors + data",
       mcit_url: "code.mcit.gov.sa — Hajj & Umrah Tech Challenge",
+      mgr_roi: "ROI estimate",
+      mgr_roi_d: "Operational savings vs paper + WhatsApp",
+      mgr_sla: "SLA compliance",
+      mgr_zones: "Group distribution — holy sites",
+      mgr_alerts_br: "Alert breakdown",
+      mgr_top_groups: "Top performing groups",
+      mgr_int_health: "Integration health",
+      mgr_cost_save: "Est. seasonal savings",
+      mgr_contract: "Contract readiness",
     },
   };
 
@@ -341,16 +359,66 @@
     if (!el) return;
     const groups = 48;
     const pilgrims = groups * 45;
+    const zones = lang === "ar"
+      ? [["منى — المخيمات", 18], ["عرفات", 12], ["مزدلفة", 4], ["المطاف", 8], ["الجمرات", 6]]
+      : [["Mina — camps", 18], ["Arafah", 12], ["Muzdalifah", 4], ["Mataf", 8], ["Jamarat", 6]];
+    const alertsBr = lang === "ar"
+      ? [["فقد", 34, "r"], ["طبي", 28, "a"], ["ابتعاد", 41, "a"], ["SOS", 8, "r"], ["حر", 16, "a"]]
+      : [["Missing", 34, "r"], ["Medical", 28, "a"], ["Drift", 41, "a"], ["SOS", 8, "r"], ["Heat", 16, "a"]];
+    const topGroups = lang === "ar"
+      ? [["مجموعة أ-١٢ · منى", "98%"], ["مجموعة ب-٠٧ · عرفات", "96%"], ["مجموعة ج-٠٣ · المطاف", "95%"], ["مجموعة د-٢١ · الجمرات", "94%"], ["مجموعة ه-٠٩ · منى", "93%"]]
+      : [["Group A-12 · Mina", "98%"], ["Group B-07 · Arafah", "96%"], ["Group C-03 · Mataf", "95%"], ["Group D-21 · Jamarat", "94%"], ["Group E-09 · Mina", "93%"]];
+    const sla = lang === "ar"
+      ? [["زمن لمّ الشمل", "< 15 د", "94%"], ["استجابة طبية", "< 8 د", "91%"], ["تأكيد حضور", "> 90%", "91%"], ["تصعيد SEHA", "< 3 د", "100%"], ["مزامنة offline", "< 60 ث", "99%"]]
+      : [["Reunification time", "< 15 min", "94%"], ["Medical response", "< 8 min", "91%"], ["Confirmed attendance", "> 90%", "91%"], ["SEHA escalation", "< 3 min", "100%"], ["Offline sync", "< 60 s", "99%"]];
+    const intHealth =
+      typeof integrationStats === "function"
+        ? integrationStats()
+        : {};
+    const intRows = ["baseer", "nusuk", "nbiz", "seha", "sec", "adilla"]
+      .map((id) => {
+        const s = intHealth[id] || { count: 0, ok: 0 };
+        const pct = s.count ? Math.round((s.ok / s.count) * 100) : 100;
+        const names = { baseer: "Baseer", nusuk: "Nusuk", nbiz: "N.Business", seha: "SEHA", sec: "Security", adilla: "Adilla" };
+        return `<div class="row"><span>${names[id]}</span><span class="pill ${pct >= 95 ? "g" : "a"}">${pct}%</span></div>`;
+      })
+      .join("");
+    const maxA = Math.max(...alertsBr.map((x) => x[1]));
     el.innerHTML = `<div class="grid g4">
       <div class="card kpi k-b"><div class="n">${groups}</div><div class="l">${xt("mgr_groups")}</div></div>
       <div class="card kpi k-g"><div class="n">${pilgrims.toLocaleString()}</div><div class="l">${xt("mgr_pilgrims")}</div></div>
       <div class="card kpi k-a"><div class="n">127</div><div class="l">${xt("mgr_alerts")}</div></div>
       <div class="card kpi k-g"><div class="n">91%</div><div class="l">${xt("mgr_scan")}</div></div>
     </div>
-    <div class="card" style="margin-top:14px"><h3>${xt("pilot_t")}</h3>
-      <div class="row"><span>${xt("pilot_reunite")}</span><span><span class="pill r">47m</span> → <span class="pill g">8m</span></span></div>
-      <div class="row"><span>${xt("pilot_scan")}</span><span><span class="pill a">62%</span> → <span class="pill g">94%</span></span></div>
-      <div class="row"><span>${xt("pilot_drift")}</span><span><span class="pill a">41%</span> → <span class="pill g">73%</span></span></div>
+    <div class="grid g2" style="margin-top:14px">
+      <div class="card"><h3>${xt("mgr_zones")}</h3>
+        ${zones.map(([z, n]) => `<div class="row"><span>${z}</span><span><span class="pill b">${n}</span> ${lang === "ar" ? "مجموعة" : "groups"}</span></div>`).join("")}
+      </div>
+      <div class="card"><h3>${xt("mgr_alerts_br")}</h3>
+        ${alertsBr.map(([lb, n, c]) => `<div class="row"><span>${lb}</span><div class="mgr-bar" style="width:120px">${Array.from({ length: 5 }, (_, i) => `<i class="${c}" style="height:${Math.round((n / maxA) * 100 * (0.5 + i * 0.1))}%"></i>`).join("")}</div><span class="pill ${c}">${n}</span></div>`).join("")}
+      </div>
+    </div>
+    <div class="grid g2" style="margin-top:14px">
+      <div class="card"><h3>${xt("mgr_sla")}</h3>
+        ${sla.map(([a, tgt, pct]) => `<div class="row"><span><b>${a}</b><div class="id">${tgt}</div></span><span class="pill g">${pct}</span></div>`).join("")}
+      </div>
+      <div class="card"><h3>${xt("mgr_int_health")}</h3>${intRows || `<p class="id">${lang === "ar" ? "نفّذ إجراءً لتفعيل سجل Webhooks" : "Run an action to populate webhook log"}</p>`}
+        <button type="button" class="btn sm ghost" style="margin-top:10px" onclick="goView('integrations')">${lang === "ar" ? "فتح خريطة التكامل" : "Open integration map"}</button>
+      </div>
+    </div>
+    <div class="grid g2" style="margin-top:14px">
+      <div class="card"><h3>${xt("pilot_t")}</h3>
+        <div class="row"><span>${xt("pilot_reunite")}</span><span><span class="pill r">47m</span> → <span class="pill g">8m</span></span></div>
+        <div class="row"><span>${xt("pilot_scan")}</span><span><span class="pill a">62%</span> → <span class="pill g">94%</span></span></div>
+        <div class="row"><span>${xt("pilot_drift")}</span><span><span class="pill a">41%</span> → <span class="pill g">73%</span></span></div>
+      </div>
+      <div class="card"><h3>${xt("mgr_roi")}</h3>
+        <p class="id">${xt("mgr_roi_d")}</p>
+        <div class="row"><span>${xt("mgr_cost_save")}</span><span class="pill g">≈ 2.4M SAR</span></div>
+        <div class="row"><span>${xt("mgr_contract")}</span><span class="pill g">${lang === "ar" ? "جاهز للعقد" : "Contract-ready"}</span></div>
+        <h3 style="margin-top:14px">${xt("mgr_top_groups")}</h3>
+        ${topGroups.map(([g, s]) => `<div class="row"><span>${g}</span><span class="pill g">${s}</span></div>`).join("")}
+      </div>
     </div>`;
   }
 
@@ -369,7 +437,7 @@
   function renderQrPitch() {
     const el = document.getElementById("ptQr");
     if (!el) return;
-    const url = location.href.split("?")[0] + "?judge=1";
+    const url = typeof getDemoUrl === "function" ? getDemoUrl() : location.href.split("?")[0] + "?judge=1";
     el.innerHTML = `<div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap">
       <img src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=${encodeURIComponent(url)}" width="140" height="140" alt="QR" style="border-radius:10px;border:1px solid var(--line)"/>
       <div><b>${xt("qr_t")}</b><div class="id mono" style="margin-top:6px;word-break:break-all">${url}</div></div>
@@ -546,6 +614,7 @@
     renderRitualAlert();
     renderHeatPanel();
     renderMcit();
+    if (typeof renderIntegrations === "function") renderIntegrations();
     patchMedProto();
     patchForecastExplain();
     patchNavA11y();
@@ -661,6 +730,7 @@
     renderSosStrip();
     renderCrowdTabLabels();
     renderMcit();
+    if (typeof renderIntegrations === "function") renderIntegrations();
   };
 
   // Auto-init when loaded after main app

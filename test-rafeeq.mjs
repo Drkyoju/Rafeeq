@@ -54,7 +54,7 @@ page.on("console", (msg) => {
 
 const views = [
   "dash", "group", "alerts", "crowd", "scan", "medical", "missing", "wear",
-  "trans", "exp", "fiqh", "copilot", "coord", "reports", "pitch",
+  "trans", "exp", "fiqh", "copilot", "coord", "reports", "integrations", "pitch",
 ];
 
 await page.goto(base, { waitUntil: "networkidle" });
@@ -120,6 +120,13 @@ await page.click("#netBtn");
 
 await page.click('.rail button[data-v="wear"]');
 await page.waitForSelector("#sehaPanel .row", { timeout: 3000 });
+
+await page.evaluate(() => goView("integrations"));
+await page.waitForSelector("#integrations.active", { timeout: 3000 });
+await page.waitForSelector("#intMap .int-hub-center", { timeout: 3000 });
+await page.click('button[onclick="testAllWebhooks()"]');
+await page.waitForSelector("#intLog .int-log-row, #intLog .id", { timeout: 5000 });
+
 const gf = await page.textContent("#gfList");
 if (!gf || gf.length < 10) throw new Error("Geofence list empty");
 
@@ -152,4 +159,4 @@ if (errors.length) {
   process.exit(1);
 }
 
-console.log("PASS — 15 views (AR+EN), alerts inbox, UX pack, Netlify-ready, IndexedDB");
+console.log("PASS — 16 views, integrations, manager KPIs, PDF deck, Netlify-ready");

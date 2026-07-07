@@ -285,6 +285,21 @@ body.high-contrast{font-size:15px}
 .mcit-row:last-child{border:0}
 .mcit-row .ok{color:var(--green);font-weight:900;flex-shrink:0;font-size:15px}
 .mcit-row a{color:var(--brand);font-weight:700;cursor:pointer;text-decoration:none}
+.int-hub-wrap{position:relative;padding:20px 0}
+.int-hub-center{text-align:center;padding:20px;border:2px solid var(--brand);border-radius:16px;background:var(--card);max-width:420px;margin:0 auto 20px}
+.int-hub-ic{display:inline-flex;width:44px;height:44px;border-radius:12px;background:var(--ink);color:var(--bg);align-items:center;justify-content:center;font-family:var(--disp);font-size:22px;font-weight:900;margin-bottom:8px}
+.int-orbit{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}
+.int-node{padding:12px;border-radius:12px;border:1.5px solid var(--line);background:var(--bg);cursor:pointer;transition:transform .15s,border-color .15s;font-size:12px}
+.int-node:hover{transform:translateY(-2px);border-color:var(--brand)}
+.int-node.st-live{border-color:var(--green)}
+.int-node.st-pilot{border-color:var(--amber)}
+.int-node.st-planned{opacity:.72}
+.int-node-ic{font-size:20px;display:block;margin-bottom:4px}
+.int-node-nm{font-weight:700;display:block;margin-bottom:6px;line-height:1.3}
+.int-log-row{font-size:12px}
+.mgr-bar{display:flex;gap:4px;align-items:flex-end;height:48px;margin-top:8px}
+.mgr-bar i{flex:1;border-radius:4px 4px 0 0;min-height:4px;background:var(--brand)}
+.mgr-bar i.g{background:var(--green)}.mgr-bar i.a{background:var(--amber)}.mgr-bar i.r{background:var(--red)}
 </style>
 </head>
 <body data-theme="light">
@@ -309,6 +324,7 @@ body.high-contrast{font-size:15px}
   <button class="nav-ext track3-hide" data-v="exp"><span class="ic">🕋</span><span data-i="nav_exp"></span></button>
   <button class="nav-ext track3-hide" data-v="fiqh"><span class="ic">📖</span><span data-i="nav_fiqh"></span></button>
   <div class="sec nav-ext nav-ext-judge" data-i="sec_admin"></div>
+  <button class="nav-ext nav-ext-judge" data-v="integrations"><span class="ic">🔗</span><span data-i="nav_integrations"></span></button>
   <button class="nav-ext nav-ext-judge" data-v="manager"><span class="ic">🏢</span><span data-i="nav_manager"></span></button>
   <button class="nav-ext nav-ext-judge" data-v="copilot"><span class="ic">✨</span><span data-i="nav_ai"></span></button>
   <button class="nav-ext nav-ext-judge" data-v="coord"><span class="ic">🤝</span><span data-i="nav_coord"></span></button>
@@ -409,6 +425,31 @@ body.high-contrast{font-size:15px}
   <!-- ============ MANAGER VIEW ============ -->
   <section class="view" id="manager" aria-hidden="true">
     <div id="managerBoard"></div>
+  </section>
+
+  <!-- ============ INTEGRATIONS MAP ============ -->
+  <section class="view" id="integrations" aria-hidden="true">
+    <div class="card" style="margin-bottom:14px;border-color:var(--brand)">
+      <h3><span data-i="ttl_integrations"></span></h3>
+      <p class="id" data-i="sub_integrations"></p>
+      <div id="intMap" style="margin-top:14px"></div>
+    </div>
+    <div class="grid g2">
+      <div class="card">
+        <h3 data-i="int_arch"></h3>
+        <div id="intList"></div>
+        <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap">
+          <button type="button" class="btn sm" onclick="testAllWebhooks()" data-i="int_test_all"></button>
+          <button type="button" class="btn sm ghost" onclick="clearWebhookLog()" data-i="int_clear_log"></button>
+        </div>
+      </div>
+      <div class="card">
+        <h3 data-i="int_health"></h3>
+        <div id="intHealth"></div>
+        <h3 style="margin-top:16px" data-i="int_webhook_log"></h3>
+        <div id="intLog"></div>
+      </div>
+    </div>
   </section>
 
   <!-- ============ 2. GROUP ============ -->
@@ -680,6 +721,8 @@ body.high-contrast{font-size:15px}
     <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:14px">
       <button class="btn sm" onclick="exportProjectProfile()" data-i="exp_profile"></button>
       <button class="btn sm ghost" onclick="printPitch()" data-i="pt_print"></button>
+      <button class="btn sm" onclick="goView('integrations')" data-i="pt_integrations"></button>
+      <a class="btn sm" href="./pitch-deck.html" target="_blank" rel="noopener" data-i="pt_pdf"></a>
     </div>
   </section>
 </main>
@@ -773,6 +816,7 @@ body.high-contrast{font-size:15px}
   <button type="button" class="track3-hide" data-v="exp" onclick="goView('exp');closeMoreNav()">🕋 <span data-i="nav_exp"></span></button>
   <button type="button" class="track3-hide" data-v="fiqh" onclick="goView('fiqh');closeMoreNav()">📖 <span data-i="nav_fiqh"></span></button>
   <button type="button" class="nav-ext-judge" data-v="manager" onclick="goView('manager');closeMoreNav()">🏢 <span data-i="nav_manager"></span></button>
+  <button type="button" class="nav-ext-judge" data-v="integrations" onclick="goView('integrations');closeMoreNav()">🔗 <span data-i="nav_integrations"></span></button>
   <button type="button" data-v="copilot" onclick="goView('copilot');closeMoreNav()">✨ <span data-i="nav_ai"></span></button>
   <button type="button" data-v="coord" onclick="goView('coord');closeMoreNav()">🤝 <span data-i="nav_coord"></span></button>
   <button type="button" data-v="reports" onclick="goView('reports');closeMoreNav()">📈 <span data-i="nav_rep"></span></button>
@@ -787,10 +831,10 @@ body.high-contrast{font-size:15px}
 const I18N = {
 ar:{
  nav_dash:"لوحة",nav_group:"المجموعة",nav_crowd:"الحشود",nav_alerts:"تنبيهات",nav_more:"المزيد",nav_med:"طبي",nav_miss:"مفقودون",nav_scan:"مسح",
- nav_wear:"الأساور",nav_trans:"ترجمة",nav_exp:"التجربة",nav_coord:"تنسيق",nav_fiqh:"فقه",nav_rep:"تقارير",nav_manager:"مدير الشركة",
+ nav_wear:"الأساور",nav_trans:"ترجمة",nav_exp:"التجربة",nav_coord:"تنسيق",nav_fiqh:"فقه",nav_rep:"تقارير",nav_manager:"مدير الشركة",nav_integrations:"التكامل",
  ttl_dash:"لوحة العمليات",ttl_group:"مجموعة الحجاج",ttl_alerts:"صندوق التنبيهات",ttl_crowd:"إدارة الحشود الذكية",ttl_medical:"السجل الطبي الميداني",
  ttl_missing:"المفقودون ولمّ الشمل",ttl_scan:"مسح بطاقة نُسك",ttl_wear:"سوار نُسك والأجهزة",ttl_trans:"الترجمة والتواصل",
- ttl_exp:"تجربة الحاج الذكية",ttl_coord:"التنسيق بين الجهات",ttl_fiqh:"المرشد الفقهي الذكي",ttl_reports:"تقارير ما بعد الحج",ttl_manager:"لوحة مدير الشركة",
+ ttl_exp:"تجربة الحاج الذكية",ttl_coord:"التنسيق بين الجهات",ttl_fiqh:"المرشد الفقهي الذكي",ttl_reports:"تقارير ما بعد الحج",ttl_manager:"لوحة مدير الشركة",ttl_integrations:"خريطة التكامل",
  sub:"رفيق — كونسول العمليات الميداني للمطوّف · مجموعة ٤٥ حاجًا · شركة أدلّاء رواف منى",
  dayof:"اليوم الثاني — ٩ ذو الحجة ١٤٤٨ · يوم عرفة",
  k_present:"حاضر ومؤكد",k_med:"حالات طبية نشطة",k_miss:"مفقود الآن",k_scan:"تم مسحهم اليوم",
@@ -845,7 +889,7 @@ ar:{
  pt_track_d:"مسار يركز على أنظمة ذكية لمراقبة الحشود وتحليلها وإدارتها في التجمعات الكبرى، تعتمد على الذكاء الاصطناعي وأجهزة الاستشعار وتحليل البيانات لضمان السلامة وتنظيم تدفق الحشود في المشاعر المقدسة.",
  pt_badge_mvp:"المنتج الأولي (MVP)",pt_badge_bi:"ثنائي اللغة",pt_badge_proto:"نموذج أولي تفاعلي",
  pt_req:"مطابقة متطلبات التحدي الرسمية",pt_req_sub:"حسب code.mcit.gov.sa + نموذج التسجيل",
- pt_print:"طباعة العرض / PDF",exp_profile:"تصدير الملف التعريفي (JSON)",
+ pt_print:"طباعة العرض / PDF",pt_pdf:"تحميل PDF العرض",pt_integrations:"خريطة التكامل",exp_profile:"تصدير الملف التعريفي (JSON)",
  crowd_track_t:"مسار تقنيات إدارة الحشود الذكية",crowd_track_d:"مراقبة · تحليل · إدارة — بالذكاء الاصطناعي والاستشعار وتحليل البيانات",
  pt_prob:"المشكلة",pt_why:"لماذا الآن؟",
  pt_diff:"لماذا لم يُبنَ من قبل؟ (خريطة المنافسين)",pt_diff_sub:"مبني على مسح فعلي للسوق والمشاريع السابقة",
@@ -899,10 +943,10 @@ ar:{
 },
 en:{
  nav_dash:"Board",nav_group:"Group",nav_crowd:"Crowd",nav_alerts:"Alerts",nav_more:"More",nav_med:"Medical",nav_miss:"Missing",nav_scan:"Scan",
- nav_wear:"Bands",nav_trans:"Translate",nav_exp:"Journey",nav_coord:"Coord",nav_fiqh:"Fiqh",nav_rep:"Reports",nav_manager:"Manager",
+ nav_wear:"Bands",nav_trans:"Translate",nav_exp:"Journey",nav_coord:"Coord",nav_fiqh:"Fiqh",nav_rep:"Reports",nav_manager:"Manager",nav_integrations:"Integrations",
  ttl_dash:"Operations Board",ttl_group:"Pilgrim Group",ttl_alerts:"Alerts inbox",ttl_crowd:"Smart Crowd Management",ttl_medical:"Field Medical Record",
  ttl_missing:"Missing & Reunification",ttl_scan:"Scan Nusuk Card",ttl_wear:"Nusuk Band & Wearables",ttl_trans:"Translation & Comms",
- ttl_exp:"Smart Pilgrim Journey",ttl_coord:"Inter-Entity Coordination",ttl_fiqh:"AI Fiqh Guide",ttl_reports:"Post-Hajj Reports",ttl_manager:"Company manager board",
+ ttl_exp:"Smart Pilgrim Journey",ttl_coord:"Inter-Entity Coordination",ttl_fiqh:"AI Fiqh Guide",ttl_reports:"Post-Hajj Reports",ttl_manager:"Company manager board",ttl_integrations:"Integration Map",
  sub:"Rafeeq — the mutawwif's field-ops console · Group of 45 pilgrims · Rawaf Mina Adilla Co.",
  dayof:"Day 2 — 9 Dhul Hijjah 1448 · Day of Arafah",
  k_present:"Present & confirmed",k_med:"Active medical cases",k_miss:"Missing now",k_scan:"Scanned today",
@@ -957,7 +1001,7 @@ en:{
  pt_track_d:"A track focused on intelligent systems to monitor, analyze, and manage crowds in large gatherings — using AI, sensors, and data analysis to ensure safety and organize crowd flow in the holy sites.",
  pt_badge_mvp:"MVP stage",pt_badge_bi:"Bilingual AR/EN",pt_badge_proto:"Interactive prototype",
  pt_req:"Official challenge requirements fit",pt_req_sub:"Per code.mcit.gov.sa + registration form",
- pt_print:"Print pitch / PDF",exp_profile:"Export project profile (JSON)",
+ pt_print:"Print pitch / PDF",pt_pdf:"Download pitch PDF",pt_integrations:"Integration map",exp_profile:"Export project profile (JSON)",
  crowd_track_t:"Smart Crowd Management track",crowd_track_d:"Monitor · analyze · manage — with AI, sensors, and data analysis",
  pt_prob:"The problem",pt_why:"Why now?",
  pt_diff:"Why hasn't this been built? (competitor map)",pt_diff_sub:"Based on an actual market & prior-art scan",
@@ -1451,7 +1495,7 @@ function stPill(s){return s==="present"?`<span class="pill g">${t("st_present")}
 function av(p){return `<span class="avatar">${nm(p).slice(0,1)}</span>`}
 
 /* ================= NAV / SHELL ================= */
-const TITLES={dash:"ttl_dash",group:"ttl_group",alerts:"ttl_alerts",crowd:"ttl_crowd",medical:"ttl_medical",missing:"ttl_missing",scan:"ttl_scan",wear:"ttl_wear",trans:"ttl_trans",exp:"ttl_exp",coord:"ttl_coord",fiqh:"ttl_fiqh",reports:"ttl_reports",pitch:"ttl_pitch",copilot:"ttl_copilot",manager:"ttl_manager"};
+const TITLES={dash:"ttl_dash",group:"ttl_group",alerts:"ttl_alerts",crowd:"ttl_crowd",medical:"ttl_medical",missing:"ttl_missing",scan:"ttl_scan",wear:"ttl_wear",trans:"ttl_trans",exp:"ttl_exp",coord:"ttl_coord",fiqh:"ttl_fiqh",reports:"ttl_reports",pitch:"ttl_pitch",copilot:"ttl_copilot",manager:"ttl_manager",integrations:"ttl_integrations"};
 let curView="dash";
 document.querySelectorAll(".rail button[data-v]").forEach(b=>b.onclick=()=>{
   curView=b.dataset.v;
@@ -2120,6 +2164,7 @@ function renderAll(){
   if(typeof renderPilotMetrics==="function")renderPilotMetrics();
   if(typeof renderQrPitch==="function")renderQrPitch();
   if(typeof renderManager==="function")renderManager();
+  if(typeof renderIntegrations==="function")renderIntegrations();
   persist();
 }
 async function boot(){
@@ -2150,5 +2195,6 @@ setInterval(()=>{
 },4000);
 </script>
 <script src="rafeeq-enhancements.js"></script>
+<script src="rafeeq-integrations.js"></script>
 </body>
 </html>

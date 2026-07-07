@@ -6,7 +6,8 @@
     "test": "node test-rafeeq.mjs",
     "serve": "npx --yes serve -l 4173",
     "glm-proxy": "node glm-proxy.mjs",
-    "build": "echo 'Static site — no build step'"
+    "build": "echo 'Static site — no build step'",
+    "pdf": "node generate-pitch-pdf.mjs"
   },
   "keywords": [],
   "author": "",

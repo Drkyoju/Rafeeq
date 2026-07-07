@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>رفيق — عرض MCIT | Rafeeq Pitch</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;600;700&display=swap');
+:root{--ink:#0f110e;--brand:#1a6b4a;--sand:#c4a35a;--muted:#5c6358;--line:#e2e6dc;--bg:#f7f8f4}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'IBM Plex Sans Arabic',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.75;font-size:14px}
+.page{max-width:820px;margin:0 auto;padding:48px 40px;page-break-after:always;min-height:100vh}
+.page:last-child{page-break-after:auto}
+.cover{text-align:center;padding:80px 20px;background:linear-gradient(160deg,#0f110e 0%,#1a6b4a 100%);color:#fff;border-radius:0;margin:-48px -40px 40px;padding:100px 40px}
+.cover .mark{width:72px;height:72px;border-radius:18px;background:#fff;color:var(--ink);display:inline-flex;align-items:center;justify-content:center;font-size:36px;font-weight:900;margin-bottom:20px}
+.cover h1{font-size:42px;margin-bottom:8px}
+.cover .sub{font-size:16px;opacity:.85;margin-bottom:24px}
+.badge{display:inline-block;padding:6px 14px;border-radius:20px;font-size:12px;font-weight:700;margin:4px;background:rgba(255,255,255,.15)}
+h2{font-size:22px;color:var(--brand);margin-bottom:16px;border-bottom:2px solid var(--brand);padding-bottom:8px}
+h3{font-size:15px;margin:16px 0 8px}
+p,li{font-size:13.5px;color:#333}
+ul{padding-right:20px;margin-bottom:12px}
+.row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--line);font-size:13px}
+.row b{display:block;margin-bottom:2px}
+.id{font-size:12px;color:var(--muted)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.card{border:1px solid var(--line);border-radius:12px;padding:16px;background:#fff}
+.ok{color:var(--brand);font-weight:800}
+.qr{text-align:center;margin:24px 0}
+.qr img{border:1px solid var(--line);border-radius:10px}
+.footer{text-align:center;font-size:11px;color:var(--muted);margin-top:40px}
+.en{direction:ltr;text-align:left;font-family:system-ui,sans-serif}
+.en ul{padding-left:20px;padding-right:0}
+@media print{
+  body{background:#fff}
+  .page{padding:32px;min-height:auto}
+  .cover{margin:-32px -32px 32px;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .no-print{display:none}
+}
+.btn-print{position:fixed;bottom:20px;left:20px;padding:12px 20px;background:var(--brand);color:#fff;border:0;border-radius:10px;font-weight:700;cursor:pointer;z-index:9}
+</style>
+</head>
+<body>
+<button class="btn-print no-print" onclick="window.print()">🖨️ طباعة / PDF</button>
+
+<!-- PAGE 1: COVER -->
+<section class="page">
+  <div class="cover">
+    <div class="mark">ر</div>
+    <h1>رفيق للمطوفين</h1>
+    <p class="sub">Rafeeq for Mutawwifs — Smart Crowd Management</p>
+    <span class="badge">مسار ٣ — تقنيات إدارة الحشود الذكية</span>
+    <span class="badge">تحدي CODE — وزارة الاتصالات</span>
+    <span class="badge">MVP · ثنائي اللغة · PWA</span>
+  </div>
+  <div class="qr">
+    <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https%3A%2F%2Frafeqai.netlify.app%2F%3Fjudge%3D1" width="160" height="160" alt="QR">
+    <p style="margin-top:12px;font-weight:700">https://rafeqai.netlify.app/?judge=1</p>
+    <p class="id">امسح لفتح العرض الحي — Track 3 judge mode</p>
+  </div>
+  <p style="text-align:center;font-size:15px;max-width:600px;margin:0 auto"><b>الأطروحة:</b> رفيق يحوّل بطاقة نُسك الإلزامية إلى نظام تشغيل للمجموعة — حضور، مفقودون، طوارئ، وتوجيه حشود — من جهاز لوحي واحد للمشرف الميداني.</p>
+</section>
+
+<!-- PAGE 2: PROBLEM + SOLUTION -->
+<section class="page">
+  <h2>المشكلة والحل</h2>
+  <div class="grid2">
+    <div class="card">
+      <h3>❌ المشكلة</h3>
+      <ul>
+        <li>المشرف يدير ٤٥ حاجاً بورقة وواتساب</li>
+        <li>الفقد عند الانتقالات بين المشاعر</li>
+        <li>قرارات الحر والطوارئ دون بروتوCOL</li>
+        <li>بطاقة وسوار لكل حاج — بلا شاشة موحّدة</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>✅ الحل — رفيق</h3>
+      <ul>
+        <li>كونسول عمليات ميداني للمطوّف</li>
+        <li>٤٥ خرزة — نبض المجموعة لحظياً</li>
+        <li>خريطة حشود + تنبؤ تدفق الجمرات</li>
+        <li>دمج ٥ مصادر: نُسك + سوار + بصير + صحة + ميدان</li>
+      </ul>
+    </div>
+  </div>
+  <h2 style="margin-top:28px">لماذا الآن؟</h2>
+  <div class="row"><span><b>بطاقة نُسك إلزامية</b><span class="id">بنية تحتية مجانية جاهزة</span></span></div>
+  <div class="row"><span><b>أساور SDAIA/STC</b><span class="id">GPS + vitals + SOS متاح</span></span></div>
+  <div class="row"><span><b>شركات الأدلاء = B2B</b><span class="id">عميل يملك ميزانية ومساءلة</span></span></div>
+  <div class="row"><span><b>نُسك بيزنس</b><span class="id">قنوات B2B رسمية للتكامل</span></span></div>
+</section>
+
+<!-- PAGE 3: TRACK 3 COMPLIANCE -->
+<section class="page">
+  <h2>مطابقة مسار ٣ — MCIT</h2>
+  <p class="id" style="margin-bottom:16px">مراقبة · تحليل · إدارة — ذكاء اصطناعي + استشعار + بيانات</p>
+  <div class="row"><span><span class="ok">✓</span> <b>مراقبة الحشود</b><span class="id">خريطة كثافة + ٤٥ نقطة + مسح نُسك</span></span></div>
+  <div class="row"><span><span class="ok">✓</span> <b>تحليل الحشود</b><span class="id">تنبؤ ٦ ساعات + تدفق دخول/خروج الجمرات</span></span></div>
+  <div class="row"><span><span class="ok">✓</span> <b>إدارة الحشود</b><span class="id">مسار بديل + بث مطوفين + لمّ شمل</span></span></div>
+  <div class="row"><span><span class="ok">✓</span> <b>الذكاء الاصطناعي</b><span class="id">Copilot + تنبؤ + قواعد إنذار</span></span></div>
+  <div class="row"><span><span class="ok">✓</span> <b>أجهزة الاستشعار</b><span class="id">نُسك + سوار + صحة ECG + بصير</span></span></div>
+  <div class="row"><span><span class="ok">✓</span> <b>تحليل البيانات</b><span class="id">CSV/JSON + سجل تدقيق + جيوفنس</span></span></div>
+  <div class="row"><span><span class="ok">✓</span> <b>السلامة</b><span class="id">طوارئ + SOS + إجهاد حراري</span></span></div>
+  <div class="row"><span><span class="ok">✓</span> <b>ثنائي اللغة + PWA + Netlify</b><span class="id">rafeqai.netlify.app</span></span></div>
+  <h2 style="margin-top:28px">مؤشرات التجربة (متوقعة)</h2>
+  <div class="grid2">
+    <div class="card"><b>زمن لمّ الشمل</b><p>47 د → <span class="ok">8 د</span> (−83%)</p></div>
+    <div class="card"><b>حضور مؤكّد</b><p>62% → <span class="ok">94%</span></p></div>
+    <div class="card"><b>كشف ابتعاد مبكر</b><p>41% → <span class="ok">73%</span></p></div>
+    <div class="card"><b>توفير موسمي</b><p>≈ <span class="ok">2.4M SAR</span> (48 مجموعة)</p></div>
+  </div>
+</section>
+
+<!-- PAGE 4: INTEGRATIONS -->
+<section class="page">
+  <h2>خريطة التكامل — المنظومة الوطنية</h2>
+  <p class="id">رفيق = عقدة العمليات الميدانية بين القرار الوطني والتنفيذ</p>
+  <div class="grid2" style="margin-top:16px">
+    <div class="card"><h3>📡 بصير (SDAIA)</h3><p class="id">Pilot — كثافة + تنبؤ وارد</p></div>
+    <div class="card"><h3>🪪 نُسك</h3><p class="id">Pilot — تحقق NFC/QR</p></div>
+    <div class="card"><h3>🏢 نُسك بيزنس</h3><p class="id">Pilot — tickets صادر</p></div>
+    <div class="card"><h3>🫀 صحة الافتراضي</h3><p class="id">Pilot — RPM/ECG ثنائي</p></div>
+    <div class="card"><h3>⌚ سوار SDAIA/STC</h3><p class="id">Pilot — vitals/GPS/SOS</p></div>
+    <div class="card"><h3>🛡️ أمن المشاعر</h3><p class="id">Pilot — بلاغ فقد/SOS</p></div>
+    <div class="card"><h3>🚑 الهلال ٩٩٧</h3><p class="id">Planned — Phase 2</p></div>
+    <div class="card"><h3>🏛️ وزارة الحج</h3><p class="id">Planned — compliance</p></div>
+  </div>
+  <p style="margin-top:20px;font-size:12px;color:var(--muted)">* Webhooks محاكاة في النموذج — المعمارية جاهزة للربط الرسمي عبر APIs معتمدة</p>
+</section>
+
+<!-- PAGE 5: TECH + BUSINESS -->
+<section class="page">
+  <h2>الحل التقني</h2>
+  <div class="row"><span><b>1 · الاستشعار</b><span class="id">نُسك + سوار + بصير + صحة + ميدان</span></span></div>
+  <div class="row"><span><b>2 · الحافة</b><span class="id">PWA offline-first — IndexedDB</span></span></div>
+  <div class="row"><span><b>3 · البيانات</b><span class="id">Supabase — PostgreSQL + realtime</span></span></div>
+  <div class="row"><span><b>4 · الذكاء</b><span class="id">تنبؤ + قواعد + GLM-5 اختياري</span></span></div>
+  <div class="row"><span><b>5 · الامتثال</b><span class="id">PDPL — بيانات السلامة فقط</span></span></div>
+  <h2 style="margin-top:28px">نموذج العمل</h2>
+  <div class="row"><span><b>العميل</b><span class="id">شركات الأدلاء B2B</span></span></div>
+  <div class="row"><span><b>التسعير</b><span class="id">~500 SAR/مجموعة/موسم + رخصة شركة</span></span></div>
+  <div class="row"><span><b>السوق</b><span class="id">≈ 37K مجموعة محتملة</span></span></div>
+  <div class="row"><span><b>الانطلاقة</b><span class="id">Pilot موسم واحد — 50–100 مجموعة</span></span></div>
+  <h2 style="margin-top:28px">خارطة الطريق</h2>
+  <div class="row"><span><b>يوليو ٢٠٢٦</b><span class="id">نموذج تفاعلي + فرز</span></span></div>
+  <div class="row"><span><b>أغسطس</b><span class="id">Backend + تكامل نُسك بيزنس</span></span></div>
+  <div class="row"><span><b>موسم قادم</b><span class="id">Pilot ميداني + KPIs</span></span></div>
+</section>
+
+<!-- PAGE 6: ENGLISH SUMMARY -->
+<section class="page en">
+  <h2>Executive Summary (English)</h2>
+  <p><b>Rafeeq</b> is the mutawwif's field-ops console: it turns the mandatory Nusuk Card into the group's operating system — attendance, missing persons, medical emergencies, and crowd routing — from one tablet.</p>
+  <h3>Track 3 — Smart Crowd Management</h3>
+  <ul>
+    <li><b>Monitor:</b> live density map, 45-bead group pulse, Nusuk scan</li>
+    <li><b>Analyze:</b> 6-hour forecast, Jamarat ingress/egress flow, AI copilot</li>
+    <li><b>Manage:</b> safe reroute, mutawwif broadcast, reunification network</li>
+    <li><b>Integrate:</b> Baseer, Nusuk, Nusuk Business, SEHA Virtual, SDAIA bands</li>
+  </ul>
+  <h3>Why indispensable?</h3>
+  <p>Baseer sees the macro crowd. Nusuk serves the pilgrim. Nusuk Business is back-office. <b>Only Rafeeq</b> connects national decisions to 45 pilgrims in front of the supervisor — with health, safety, and audit trail in one second.</p>
+  <div class="qr">
+    <p><b>Live demo:</b> https://rafeqai.netlify.app/?judge=1&lang=en</p>
+  </div>
+  <p class="footer">Rafeeq · Hajj & Umrah Tech Challenge · MCIT CODE · July 2026</p>
+</section>
+</body>
+</html>
