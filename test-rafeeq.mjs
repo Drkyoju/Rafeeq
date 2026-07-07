@@ -17,7 +17,8 @@ const MIME = {
 };
 
 function serve(req, res) {
-  const path = req.url === "/" ? "/index.html" : req.url.split("?")[0];
+  const raw = req.url.split("?")[0];
+  const path = raw === "/" || raw === "" ? "/index.html" : raw;
   const file = join(ROOT, path);
   readFile(file)
     .then((buf) => {
@@ -33,7 +34,8 @@ function serve(req, res) {
 const server = createServer(serve);
 await new Promise((r) => server.listen(0, "127.0.0.1", r));
 const port = server.address().port;
-const base = `http://127.0.0.1:${port}/app.html`;
+const origin = `http://127.0.0.1:${port}`;
+const base = `${origin}/app.html`;
 
 let playwright;
 try {
@@ -57,9 +59,15 @@ const views = [
   "trans", "exp", "fiqh", "copilot", "coord", "reports", "integrations", "pitch",
 ];
 
+await Promise.all([
+  page.waitForURL(/app\.html\?judge=1/, { timeout: 8000 }),
+  page.goto(`${origin}/?judge=1`),
+]);
+
 await page.goto(base, { waitUntil: "networkidle" });
 await page.evaluate(() => {
   try { localStorage.setItem("rafeeq_onboard", "1"); } catch (e) {}
+  try { localStorage.removeItem("rafeeq_webhooks"); } catch (e) {}
   document.getElementById("onboardModal")?.classList.remove("open");
 });
 await page.waitForSelector("#beads .bead", { timeout: 10000 });
@@ -84,10 +92,32 @@ for (const v of ["crowd", "wear", "pitch", "copilot", "alerts"]) {
 }
 
 await page.click('.rail button[data-v="scan"]');
-await page.fill("#scanId", "70217");
+const scanId = await page.evaluate(() => {
+  const p = P.find((x) => !x.scanned);
+  return p ? p.id.replace("NSK-1448-", "") : "70210";
+});
+await page.fill("#scanId", scanId);
 await page.click('button[data-i="scan_confirm"]');
 await page.waitForSelector(".toast.show", { timeout: 3000 });
+await page.waitForFunction(
+  () => {
+    try {
+      return JSON.parse(localStorage.getItem("rafeeq_webhooks") || "[]").length > 0;
+    } catch {
+      return false;
+    }
+  },
+  { timeout: 3000 }
+);
 await page.waitForSelector(".toast:not(.show)", { timeout: 4000 });
+const whAfterScan = await page.evaluate(() => {
+  try {
+    return JSON.parse(localStorage.getItem("rafeeq_webhooks") || "[]");
+  } catch {
+    return [];
+  }
+});
+if (!whAfterScan.length) throw new Error("Webhook log empty after scan");
 
 await page.click('.rail button[data-v="copilot"]');
 await page.click("#aiChips .chip");
@@ -99,6 +129,7 @@ await page.evaluate(() => exportProjectProfile());
 
 await page.click('.rail button[data-v="dash"]');
 await page.waitForSelector("#mcitCheck .mcit-row", { timeout: 3000 });
+await page.waitForSelector("#intStatusCard .kpi", { timeout: 3000 });
 await page.waitForSelector("#sensorGrid .pill", { timeout: 3000 });
 await page.click('.rail button[data-v="alerts"]');
 await page.waitForSelector("#alertsList", { timeout: 3000 });
@@ -116,6 +147,8 @@ await page.click('#settingsModal button[onclick="closeModals()"]');
 
 await page.click("#netBtn");
 await page.waitForSelector("#offlineBar.show", { timeout: 3000 });
+const netSvg = await page.$("#netBtn svg.ico");
+if (!netSvg) throw new Error("netBtn SVG destroyed after offline toggle");
 await page.click("#netBtn");
 
 await page.click('.rail button[data-v="wear"]');
@@ -159,4 +192,4 @@ if (errors.length) {
   process.exit(1);
 }
 
-console.log("PASS — 16 views, integrations, manager KPIs, PDF deck, Netlify-ready");
+console.log("PASS — landing redirect, 16 views, integrations, webhooks, offline icon, Netlify-ready");

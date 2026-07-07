@@ -26,7 +26,7 @@
       nav_more: "المزيد",
       more_t: "وحدات إضافية",
       sim_badge: "بيانات تجريبية",
-      act_now: "إجراء الآن",
+      act_now: "يتطلّب إجراءً",
       act_miss: "مفقودون",
       act_med: "طبي",
       act_drift: "خارج النطاق",
@@ -42,7 +42,7 @@
       ritual_behind: "متأخرون عن خطة المناسك",
       mesh_t: "شبكة المطوفين المجاورين",
       mesh_d: "تم إشعار ٦ مطوفين ضمن ٥٠٠م",
-      pilot_t: "مؤشرات التجربة التجريبية",
+      pilot_t: "مؤشرات الأداء التجريبية",
       pilot_reunite: "زمن لمّ الشمل",
       pilot_scan: "نسبة الحضور المؤكد",
       pilot_drift: "كشف الابتعاد مبكرًا",
@@ -80,8 +80,8 @@
       mcit_sub: "مراقبة · تحليل · إدارة — ذكاء اصطناعي + استشعار + بيانات",
       mcit_url: "code.mcit.gov.sa — تحدي تقنيات الحج والعمرة",
       mgr_roi: "تقدير العائد (ROI)",
-      mgr_roi_d: "توفير تشغيلي مقارنة بورقة + واتساب",
-      mgr_sla: "SLA الامتثال",
+      mgr_roi_d: "توفير تشغيلي مقارنة بالورق وواتساب",
+      mgr_sla: "الالتزام بمستوى الخدمة",
       mgr_zones: "توزيع المجموعات — المشاعر",
       mgr_alerts_br: "تفصيل التنبيهات",
       mgr_top_groups: "أفضل المجموعات",
@@ -169,7 +169,7 @@
     { ar: "أجهزة الاستشعار — بطاقة نُسك + سوار + صحة الافتراضي (ECG) + بصير", en: "Sensors — Nusuk Card + band + SEHA Virtual (ECG) + Baseer", v: "wear" },
     { ar: "تحليل البيانات — تصدير CSV/JSON + سجل تدقيق + جيوفنس", en: "Data analysis — CSV/JSON export + audit trail + geofence", v: "reports" },
     { ar: "السلامة — طوارئ طبية + SOS + مؤشر إجهاد حراري", en: "Safety — medical incidents + SOS + heat-stress index", v: "medical" },
-    { ar: "ثنائي اللغة عربي/إنجليزي + PWA دون اتصال + موقع Netlify", en: "Bilingual AR/EN + offline PWA + Netlify website", v: "pitch" },
+    { ar: "عربي/إنجليزي + يعمل دون اتصال + موقع إلكتروني", en: "Bilingual AR/EN + offline PWA + Netlify website", v: "pitch" },
   ];
 
   function xt(k) {
@@ -363,13 +363,13 @@
       ? [["منى — المخيمات", 18], ["عرفات", 12], ["مزدلفة", 4], ["المطاف", 8], ["الجمرات", 6]]
       : [["Mina — camps", 18], ["Arafah", 12], ["Muzdalifah", 4], ["Mataf", 8], ["Jamarat", 6]];
     const alertsBr = lang === "ar"
-      ? [["فقد", 34, "r"], ["طبي", 28, "a"], ["ابتعاد", 41, "a"], ["SOS", 8, "r"], ["حر", 16, "a"]]
+      ? [["فقد", 34, "r"], ["طبي", 28, "a"], ["ابتعاد", 41, "a"], ["SOS", 8, "r"], ["إجهاد حراري", 16, "a"]]
       : [["Missing", 34, "r"], ["Medical", 28, "a"], ["Drift", 41, "a"], ["SOS", 8, "r"], ["Heat", 16, "a"]];
     const topGroups = lang === "ar"
       ? [["مجموعة أ-١٢ · منى", "98%"], ["مجموعة ب-٠٧ · عرفات", "96%"], ["مجموعة ج-٠٣ · المطاف", "95%"], ["مجموعة د-٢١ · الجمرات", "94%"], ["مجموعة ه-٠٩ · منى", "93%"]]
       : [["Group A-12 · Mina", "98%"], ["Group B-07 · Arafah", "96%"], ["Group C-03 · Mataf", "95%"], ["Group D-21 · Jamarat", "94%"], ["Group E-09 · Mina", "93%"]];
     const sla = lang === "ar"
-      ? [["زمن لمّ الشمل", "< 15 د", "94%"], ["استجابة طبية", "< 8 د", "91%"], ["تأكيد حضور", "> 90%", "91%"], ["تصعيد SEHA", "< 3 د", "100%"], ["مزامنة offline", "< 60 ث", "99%"]]
+      ? [["زمن لمّ الشمل", "< 15 د", "94%"], ["استجابة طبية", "< 8 د", "91%"], ["تأكيد حضور", "> 90%", "91%"], ["تصعيد صحة الافتراضي", "< 3 د", "100%"], ["مزامنة دون اتصال", "< 60 ث", "99%"]]
       : [["Reunification time", "< 15 min", "94%"], ["Medical response", "< 8 min", "91%"], ["Confirmed attendance", "> 90%", "91%"], ["SEHA escalation", "< 3 min", "100%"], ["Offline sync", "< 60 s", "99%"]];
     const intHealth =
       typeof integrationStats === "function"
@@ -402,7 +402,7 @@
       <div class="card"><h3>${xt("mgr_sla")}</h3>
         ${sla.map(([a, tgt, pct]) => `<div class="row"><span><b>${a}</b><div class="id">${tgt}</div></span><span class="pill g">${pct}</span></div>`).join("")}
       </div>
-      <div class="card"><h3>${xt("mgr_int_health")}</h3>${intRows || `<p class="id">${lang === "ar" ? "نفّذ إجراءً لتفعيل سجل Webhooks" : "Run an action to populate webhook log"}</p>`}
+      <div class="card"><h3>${xt("mgr_int_health")}</h3>${intRows || `<p class="id">${lang === "ar" ? "نفّذ إجراءً (مسح أو بلاغ) لملء سجل الربط" : "Run an action to populate webhook log"}</p>`}
         <button type="button" class="btn sm ghost" style="margin-top:10px" onclick="goView('integrations')">${lang === "ar" ? "فتح خريطة التكامل" : "Open integration map"}</button>
       </div>
     </div>

@@ -400,6 +400,7 @@ body.high-contrast{font-size:15px}
       <div id="mcitCheck"></div>
       <p class="mono" style="font-size:10.5px;color:var(--muted);margin-top:10px" id="mcitUrl"></p>
     </div>
+    <div class="card" style="margin-top:14px;border-color:var(--brand)" id="intStatusCard"></div>
     <div class="card" style="margin-top:14px">
       <h3><span data-i="sensor_t"></span></h3>
       <div class="grid sensor-grid-5" id="sensorGrid" style="margin-top:4px"></div>
@@ -854,11 +855,11 @@ body.high-contrast{font-size:15px}
 const I18N = {
 ar:{
  nav_dash:"لوحة",nav_group:"المجموعة",nav_crowd:"الحشود",nav_alerts:"تنبيهات",nav_more:"المزيد",nav_med:"طبي",nav_miss:"مفقودون",nav_scan:"مسح",
- nav_wear:"الأساور",nav_trans:"ترجمة",nav_exp:"التجربة",nav_coord:"تنسيق",nav_fiqh:"فقه",nav_rep:"تقارير",nav_manager:"مدير الشركة",nav_integrations:"التكامل",
+ nav_wear:"الأساور",nav_trans:"ترجمة",nav_exp:"الرحلة",nav_coord:"التنسيق",nav_fiqh:"فقه",nav_rep:"تقارير",nav_manager:"مدير الشركة",nav_integrations:"التكاملات",
  ttl_dash:"لوحة العمليات",ttl_group:"مجموعة الحجاج",ttl_alerts:"صندوق التنبيهات",ttl_crowd:"إدارة الحشود الذكية",ttl_medical:"السجل الطبي الميداني",
  ttl_missing:"المفقودون ولمّ الشمل",ttl_scan:"مسح بطاقة نُسك",ttl_wear:"سوار نُسك والأجهزة",ttl_trans:"الترجمة والتواصل",
- ttl_exp:"تجربة الحاج الذكية",ttl_coord:"التنسيق بين الجهات",ttl_fiqh:"المرشد الفقهي الذكي",ttl_reports:"تقارير ما بعد الحج",ttl_manager:"لوحة مدير الشركة",ttl_integrations:"خريطة التكامل",
- sub:"رفيق — كونسول العمليات الميداني للمطوّف · مجموعة ٤٥ حاجًا · شركة أدلّاء رواف منى",
+ ttl_exp:"رحلة الحاج الذكية",ttl_coord:"التنسيق بين الجهات",ttl_fiqh:"المرشد الفقهي الذكي",ttl_reports:"تقارير ما بعد الحج",ttl_manager:"لوحة مدير الشركة",ttl_integrations:"خريطة التكاملات",
+ sub:"رفيق — لوحة العمليات الميدانية للمطوّف · مجموعة ٤٥ حاجًا · شركة أدلّاء رواف منى",
  dayof:"اليوم الثاني — ٩ ذو الحجة ١٤٤٨ · يوم عرفة",
  k_present:"حاضر ومؤكد",k_med:"حالات طبية نشطة",k_miss:"مفقود الآن",k_scan:"تم مسحهم اليوم",
  alerts:"تنبيهات الحشود الحرجة",src_baseer:"* محاكاة بيانات بصير/SDAIA",
@@ -935,25 +936,25 @@ ar:{
  tr_glm:"ترجمة GLM",tr_rules:"ترجمة واجهة (محاكاة)",
  demo_btn:"عرض توضيحي",demo_end:"انتهى العرض التوضيحي — جرّب الوحدات بنفسك",
  off_msg:"وضع عدم الاتصال — تُحفظ الإجراءات محليًا وتُزامَن تلقائيًا عند عودة الشبكة",
- off_on:"انقطعت الشبكة (محاكاة) — رفيق يعمل دون اتصال",off_sync:"عادت الشبكة — تمت مزامنة",off_acts:"إجراءات",
+ off_on:"انقطعت الشبكة (محاكاة) — رفيق يعمل دون اتصال",off_sync:"عادت الشبكة — اكتملت مزامنة",off_acts:"إجراءات",
  sec_ops:"العمليات",sec_resp:"الاستجابة",sec_pilgrim:"الحاج",sec_admin:"الإدارة",
  mis_t:"نبض المجموعة — ٤٥ حاجًا",mis_uns:"لم يُمسح",
  fc_t:"التنبؤ بالكثافة — الساعات الست القادمة",fc_sub:"* نموذج تنبؤ تجريبي (بيانات تاريخية + تقويم المناسك)",
  fc_peak:"الذروة المتوقعة",fc_window:"أفضل نافذة تحرك لمجموعتك",fc_conf:"ثقة",
  flow_t:"تنبؤ تدفق الحشود — دخول وخروج",flow_sub:"* محاكاة بصير + عدّادات اتجاهية",
  flow_in:"داخل الجمرات",flow_out:"خارج الجمرات",flow_net:"صافي التدفق",
- flow_build:"تزداد الكثافة",flow_clear:"تتبدد الكثافة",flow_now:"الآن",
+ flow_build:"تزداد الكثافة",flow_clear:"انحسار الكثافة",flow_now:"الآن",
  flow_next:"الخطوة التالية",flow_per15:"/ ١٥ دقيقة",flow_pipe:"مسار التدفق المتوقع",
  flow_jamarat:"جسر الجمرات",flow_mina:"منى — المخيم",flow_mataf:"المطاف",flow_masaa:"المسعى",
  flow_to:"← اتجاه",
- gf_t:"درع النطاق الجغرافي — كشف الابتعاد قبل الفقد",gf_ok:"داخل النطاق",gf_drift:"يبتعد عن المجموعة",
+ gf_t:"النطاق الجغرافي — تنبيه مبكر بالابتعاد عن المجموعة",gf_ok:"داخل النطاق",gf_drift:"يبتعد عن المجموعة",
  gf_ping:"تنبيه السوار",gf_escort:"إرسال مرافق",gf_radius:"نصف قطر النطاق: ٢٥٠م حول مركز المجموعة",
  t_ping:"أُرسل اهتزاز وتنبيه صوتي إلى سوار",t_escort:"كُلّف أقرب مساعد بالتوجه إلى",
  pt_tech:"الحل التقني — كيف يعمل رفيق",pt_tech_sub:"معمارية دمج المستشعرات + الذكاء الاصطناعي + العمل دون اتصال",
  scan_manual:"أو أدخل رقم نُسك يدويًا (مثال: NSK-1448-70259 أو 70259)",scan_confirm:"تأكيد",
  scan_bad:"رقم غير صالح أو غير موجود في هذه المجموعة",scan_dup:"⚠️ مُسح مسبقًا",
  exp_json:"تصدير JSON",exp_csv:"تصدير CSV",reset_btn:"إعادة تعيين",
- audit_t:"سجل التدقيق",audit_sub:"كل إجراء يُسجَّل بطابع زمني ويُحفظ محليًا — المساءلة أولًا",
+ audit_t:"سجل التدقيق",audit_sub:"كل إجراء يُسجَّل بطابع زمني ويُحفظ محليًا — توثيق كامل",
  sim_badge:"بيانات تجريبية",judge_mode:"وضع التحكيم",track3_mode:"مسار ٣ — إدارة الحشود الذكية",more_t:"وحدات إضافية",
  mcit_t:"مطابقة متطلبات MCIT — مسار ٣",mcit_sub:"مراقبة · تحليل · إدارة — ذكاء اصطناعي + استشعار + بيانات",
  mcit_url:"code.mcit.gov.sa — تحدي تقنيات الحج والعمرة",
@@ -1416,7 +1417,7 @@ function cardioRisk(p){
 }
 function ecgLabel(p){
   const r=cardioRisk(p);
-  return r==="alert"?(lang==="ar"?"غير منتظم":"Irregular"):r==="watch"?(lang==="ar"?"مراقبة":"Monitoring"):(lang==="ar"?"جيبي طبيعي":"Sinus rhythm");
+  return r==="alert"?(lang==="ar"?"غير منتظم":"Irregular"):r==="watch"?(lang==="ar"?"تحت المراقبة":"Monitoring"):(lang==="ar"?"إيقاع جيبي طبيعي":"Sinus rhythm");
 }
 function escalateSeha(i){
   const p=P[i];
@@ -1893,7 +1894,7 @@ function renderFiqh(){
    :[["Standing at Arafah","The greatest pillar — from zawal of the 9th to fajr of the 10th"],["Combining Dhuhr & Asr","Shortened, combined early at Namirah/Arafat"],["Abundant du'a","The best du'a is the du'a of Arafah day"],["Nafrah to Muzdalifah","After sunset — calmly, then overnight there"]];
   $("#fqToday").innerHTML=today.map(([a,b])=>`<div class="row"><span><b>${a}</b><div class="id">${b}</div></span></div>`).join("");
 }
-function showFq(i){$("#fqAns").innerHTML=`<div class="card" style="background:var(--bg)"><b>${pick(FIQH[i].q)}</b><p style="margin-top:8px;font-size:13px;line-height:1.8">${pick(FIQH[i].a)}</p><span class="pill s" style="margin-top:8px;display:inline-block">${lang==="ar"?"مرجع مُعتمد":"Approved ref"}</span></div>`}
+function showFq(i){$("#fqAns").innerHTML=`<div class="card" style="background:var(--bg)"><b>${pick(FIQH[i].q)}</b><p style="margin-top:8px;font-size:13px;line-height:1.8">${pick(FIQH[i].a)}</p><span class="pill s" style="margin-top:8px;display:inline-block">${lang==="ar"?"مرجع معتمد":"Approved ref"}</span></div>`}
 function askFiqh(){
   const q=($("#fqIn").value||"").trim();if(!q)return;
   if(glmReady())askFiqhGlm(q);
@@ -2004,7 +2005,7 @@ function renderPitch(){
    :[["Nusuk Card is now mandatory","Every pilgrim carries a unified scannable digital ID — the product's infrastructure already exists, for free"],["SDAIA/STC bands rolled out","Vitals, GPS, and SOS are technically available — they only lack a field-level display layer"],["Tawafa institutions became companies","Adilla firms are now commercial entities that buy software and answer to KPIs"],["The ministry is opening the ecosystem","Nusuk Business proves official B2B channels exist to build on"]];
   $("#ptWhy").innerHTML=why.map(([a,b])=>`<div class="row"><span><b>${a}</b><div class="id">${b}</div></span></div>`).join("");
   const diff=lang==="ar"
-   ?[["نُسك (٥١+ مليون مستخدم)","تطبيق للحاج نفسه: تصاريح، إرشاد، خرائط","لا يخدم المشرف الميداني إطلاقًا"],["نُسك بيزنس","متابعة طلبات وتقارير مكتبية للشركات","نظام تذاكر — ليس كونسول عمليات لحظي"],["بصير (سدايا/الداخلية)","تحليل حشود لمركز القيادة الوطني","قراراته لا تصل للمشرف مع مجموعته"],["المطوف الرقمي (رئاسة الحرمين)","إرشاد فقهي للحاج","لا علاقة له بإدارة المجموعات"],["هاكاثون الحج ٢٠١٨ (ترجمان، مكة الآن، الأساور)","فازت أفكار الترجمة والكثافة والأساور","تبنّتها الدولة كخدمات — وبقيت طبقة المشرف فارغة"]]
+   ?[["نُسك (٥١+ مليون مستخدم)","تطبيق للحاج نفسه: تصاريح، إرشاد، خرائط","لا يخدم المشرف الميداني إطلاقًا"],["نُسك بيزنس","متابعة طلبات وتقارير مكتبية للشركات","نظام تذاكر — وليس لوحة عمليات لحظية"],["بصير (سدايا/الداخلية)","تحليل حشود لمركز القيادة الوطني","قراراته لا تصل للمشرف مع مجموعته"],["المطوف الرقمي (رئاسة الحرمين)","إرشاد فقهي للحاج","لا علاقة له بإدارة المجموعات"],["هاكاثون الحج ٢٠١٨ (ترجمان، مكة الآن، الأساور)","فازت أفكار الترجمة والكثافة والأساور","تبنّتها الدولة كخدمات — وبقيت طبقة المشرف فارغة"]]
    :[["Nusuk (51M+ users)","App for the pilgrim: permits, guidance, maps","Doesn't serve the field supervisor at all"],["Nusuk Business","Back-office requests & reports for companies","A ticketing system — not a live ops console"],["Baseer (SDAIA/MoI)","Crowd analytics for the national command center","Its decisions never reach the supervisor with his group"],["Digital Mutawwif (Two Holy Mosques)","Ritual guidance for the pilgrim","Nothing to do with group management"],["Hajj Hackathon 2018 (Turjuman, Makkah Now, bands)","Translation, density & band ideas won","The state absorbed them as services — the supervisor layer stayed empty"]];
   $("#ptDiff").innerHTML=diff.map(([a,b,c])=>`<div class="row"><span><b>${a}</b><div class="id">${b}</div></span><span class="pill s" style="max-width:46%;white-space:normal;text-align:start">${c}</span></div>`).join("");
   const bm=lang==="ar"
@@ -2072,10 +2073,10 @@ function rulesAnswer(q){
     const arr=missing.filter(m=>m.open);
     head=lang==="ar"?`${arr.length} بلاغ نشط`:`${arr.length} active report(s)`;
     body=arr.map(m=>`<div class="row"><span>${P[m.p].nat[0]} ${nm(P[m.p])} — ${t("m_lastseen")}: ${pick(ZONES[m.where])}</span><span class="mono">${m.since}</span></div>`).join("")||"✓";
-    act=lang==="ar"?"البث فعّال لـ٦ مطوفين مجاورين، وأمن المشاعر مُخطَر عبر نُسك بيزنس.":"Broadcast live to 6 nearby mutawwifs; Mashaer Security notified via Nusuk Business.";
+    act=lang==="ar"?"يُبث الآن إلى ٦ مطوفين مجاورين، وتم إخطار أمن المشاعر عبر نُسك بيزنس.":"Broadcast live to 6 nearby mutawwifs; Mashaer Security notified via Nusuk Business.";
   }else if(is("heat","حرار","إجهاد","الشمس")){
     const arr=P.filter(p=>p.hr>100||+p.temp>37.6||p.age>65).sort((a,b)=>b.hr-a.hr);
-    head=lang==="ar"?`${arr.length} حاجًا في دائرة الخطر (نبض مرتفع / حرارة / سن)`:`${arr.length} pilgrims at elevated risk (high HR / temp / age)`;
+    head=lang==="ar"?`${arr.length} حاجًا معرّضون للخطر (نبض مرتفع / حرارة / سن)`:`${arr.length} pilgrims at elevated risk (high HR / temp / age)`;
     body=nameList(arr);
     act=lang==="ar"?"إجراء مقترح: تنبيه سقيا فوري + تظليل المجموعة قبل تحرك الساعة ١٢.":"Suggested action: immediate hydration alert + shade the group before the 12:00 move.";
   }else if(is("scan","مسح","حضور","attend")){
@@ -2135,7 +2136,12 @@ function setOffline(on,silent){
   offline=on;
   const bar=$("#offlineBar");
   if(bar)bar.classList.toggle("show",offline);
-  $("#netBtn").textContent=offline?"📴":"📶";
+  const nb=$("#netBtn");
+  if(nb){
+    nb.classList.toggle("offline-on",offline);
+    nb.setAttribute("aria-pressed",offline?"true":"false");
+    nb.title=offline?(lang==="ar"?"غير متصل — اضغط للمزامنة":"Offline — click to sync"):(lang==="ar"?"متصل":"Online");
+  }
   updateSyncBadge();
   if(!silent){
     if(offline)_toast(t("off_on"));
@@ -2161,7 +2167,7 @@ function runDemo(){
   const D=lang==="ar";
   goView("dash");
   _toast(D?"🎬 العرض التوضيحي: يوم عرفة — تابع الشاشة":"🎬 Demo: Day of Arafah — watch the screen");
-  step(4000,()=>{goView("crowd");setCrowdTab("data");_toast(D?"١/٦ — بصير: كثافة حرجة + تدفق داخلي > خارجي عند الجمرات":"1/6 — Baseer: critical density + more entering than leaving at Jamarat")});
+  step(4000,()=>{goView("crowd");setCrowdTab("data");_toast(D?"١/٦ — بصير: كثافة حرجة، والدخول إلى الجمرات أكبر من الخروج":"1/6 — Baseer: critical density + more entering than leaving at Jamarat")});
   step(9000,()=>{suggestRoute();_toast(D?"٢/٦ — رفيق يقترح مسارًا بديلًا ويبثه للفريق":"2/6 — Rafeeq suggests a reroute and broadcasts it")});
   step(14000,()=>{goView("scan");doScan();_toast(D?"٣/٦ — تأكيد حضور ببطاقة نُسك في ثانية":"3/6 — Nusuk Card confirms presence in one second")});
   step(20000,()=>{goView("alerts");const cand=P.find(p=>p.status==="present"&&p.i!==13&&p.i!==33);missing.unshift({p:cand.i,where:1,since:new Date().toTimeString().slice(0,5),open:true});P[cand.i].status="miss";renderAll();_toast(D?"٤/٦ — بلاغ فقد عند المطاف: بث فوري للمطوفين المجاورين":"4/6 — Missing at the Mataf: instant broadcast to nearby mutawwifs");window._demoP=cand.i});
@@ -2194,6 +2200,7 @@ function renderAll(){
   if(typeof renderQrPitch==="function")renderQrPitch();
   if(typeof renderManager==="function")renderManager();
   if(typeof renderIntegrations==="function")renderIntegrations();
+  if(typeof renderIntStatus==="function")renderIntStatus();
   persist();
 }
 async function boot(){
